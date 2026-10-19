@@ -10,9 +10,12 @@ async function getData(url) {
       signal: AbortSignal.timeout(config.upstreamTimeoutMs) //   - Pass signal: AbortSignal.timeout(config.upstreamTimeoutMs) to fetch.
     })
 //   - fetch resolves for every HTTP status, so check res.ok yourself.
+// console.log("Status code: ", response.status);
+
     if (!response.ok) {
       //throw new Error(`Response status: ${response.status}`);
       throw new HttpError(502, "Weather API request has failed");
+
     }
 
     const result = await response.json();
@@ -61,8 +64,29 @@ export async function geocodeCity(name) {
 
 }
 
-// TODO (you): get the current weather and a 3-day daily forecast from the
-// forecast API and return the parsed response.
+//get the current weather and a 3-day daily forecast 
 export async function getForecast(latitude, longitude) {
-  throw new Error('getForecast is not written yet');
+
+  const url = new URL (`${config.forecastUrl}/forecast`);
+
+  url.searchParams.set('latitude', latitude)
+  url.searchParams.set('longitude', longitude)
+  url.searchParams.set(
+    'current', 'temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code'
+  )
+  url.searchParams.set(
+    'daily','weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max'
+  )
+  url.searchParams.set(
+    'timezone', 'auto'
+  )
+  url.searchParams.set(
+    'forecast_days', '3'
+  )
+  //return the parsed response.
+  const body = await getData(url);
+  return body;
+
+
+
 }
