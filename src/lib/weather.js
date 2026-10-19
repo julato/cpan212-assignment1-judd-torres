@@ -18,7 +18,7 @@ export async function getCityWeather(city) {
   const current = forecast.current
   const daily = forecast.daily
   const weather = {
-    location: location,
+    location: response,
     current: {
       time: current.time,
       temperatureC: current.temperature_2m,
@@ -34,7 +34,7 @@ export async function getCityWeather(city) {
         date: date,
         minC: daily.temperature_2m_min[i],
         maxC: daily.temperature_2m_max[i],
-        precipitationChancePercent: precipitation_probability_max[i],
+        precipitationChancePercent: daily.precipitation_probability_max[i],
         weatherCode: daily.weather_code[i],
         conditions: describeWeatherCode(daily.weather_code[i])
 
