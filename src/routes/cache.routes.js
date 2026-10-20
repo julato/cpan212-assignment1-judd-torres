@@ -1,8 +1,10 @@
 import { Router } from 'express';
 
+//import for cache statistics
+import { getCacheStats } from '../lib/weather.js';
 export const cacheRouter = Router();
 
-// TODO (you): respond with { data: <the cache statistics> }.
+//respond with { data: <the cache statistics> }.
 cacheRouter.get('/cache/stats', (req, res) => {
-  res.status(501).json({ error: { message: 'Not written yet: GET /api/cache/stats' } });
+  res.json({ data: getCacheStats()})
 });

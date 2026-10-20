@@ -65,7 +65,6 @@ export async function getCityWeather(city) {
   return weather;
 }
 
-// TODO (you): return the cache statistics for GET /api/cache/stats.
 export function getCacheStats() {
   return weatherCache.getStats();
 }
