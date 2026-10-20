@@ -23,7 +23,7 @@ weatherRouter.get('/weather', async (req, res) => {
 
 });
 
-// TODO (you): GET /api/compare?cities=Toronto,Vancouver,Halifax
+//GET /api/compare?cities=Toronto,Vancouver,Halifax
 // then build the cities array and the summary described on the assignment page.
 weatherRouter.get('/compare',async (req, res) => {
   
